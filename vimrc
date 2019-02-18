@@ -17,6 +17,9 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-colorscheme-switcher'
+Plugin 'morhetz/gruvbox'
 
 call vundle#end()
 
@@ -45,8 +48,11 @@ scriptencoding utf-8
 "let NERDTreeDirArrows = 1
 set number
 set relativenumber
-colorscheme lapis256 
+colorscheme lapis256
 syntax on 
+set term=screen-256color
+set t_Co=256
+set background=dark
 filetype on
 
 "Plugin Custom:
@@ -138,6 +144,14 @@ augroup reload_vimrc
     autocmd!
     autocmd bufwritepost $MYVIMRC nested source $MYVIMRC
 augroup END
+
+if has("autocmd")
+    " Enabled file type detection
+    filetype plugin on
+    " Enabled file language-dependent indenting
+    filetype indent on
+endif " has ("autocmd")
+
 
 "close Window if only NERDTREE is open:
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
